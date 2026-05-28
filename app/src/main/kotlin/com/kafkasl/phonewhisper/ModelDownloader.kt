@@ -14,9 +14,18 @@ data class Model(
     val sizeMb: Int,
     val quality: String,
     val recommended: Boolean = false,
+    val url: String? = null,
 )
 
 val MODEL_CATALOG = listOf(
+    Model(
+        "Roest Danish Wav2Vec2", 
+        "roest-v3-wav2vec2-315m",
+        315, 
+        "★★★★★ Offline Danish", 
+        recommended = false,
+        url = "https://github.com/ArtificialTruth/phone-whisper/releases/download/v1.0.0/roest-v3-wav2vec2-315m.tar.bz2"
+    ),
     Model("Parakeet 110M", "sherpa-onnx-nemo-parakeet_tdt_ctc_110m-en-36000-int8",
         100, "★★★ Best value", recommended = true),
     Model("Whisper Base", "sherpa-onnx-whisper-base.en",
@@ -48,7 +57,7 @@ object ModelDownloader {
 
     /** Download and extract model. Callbacks fire on background thread. */
     fun download(ctx: Context, model: Model, onState: (DownloadState) -> Unit) {
-        val url = "$BASE_URL/${model.archive}.tar.bz2"
+        val url = model.url ?: "$BASE_URL/${model.archive}.tar.bz2"
         val tmpFile = File(ctx.cacheDir, "${model.archive}.tar.bz2")
         val outDir = File(ctx.filesDir, "models")
 
