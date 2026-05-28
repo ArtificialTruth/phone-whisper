@@ -5,3 +5,11 @@ local.properties
 .env
 *.apk
 app/src/main/jniLibs/
+
+# Models and Archives
+roest-v3-wav2vec2-315m/
+*.tar.bz2
+
+# Python Env
+.venv/
+__pycache__/
