@@ -21,6 +21,11 @@ class LocalTranscriber private constructor(private val recognizer: OfflineRecogn
         return result.text.trim()
     }
 
+    /** Explicitly release native resources associated with the recognizer. */
+    fun release() {
+        recognizer.release()
+    }
+
     companion object {
         private const val TAG = "LocalTranscriber"
 
@@ -112,12 +117,14 @@ class LocalTranscriber private constructor(private val recognizer: OfflineRecogn
                 )
             }
 
-            // NeMo CTC (single model.onnx / model.int8.onnx)
+            // NeMo CTC or Wav2Vec2/Omnilingual CTC (single model.onnx / model.int8.onnx)
             val ctcModel = findFile(p, "model")
             if (ctcModel != null) {
+                val isOmnilingual = dir.name.contains("wav2vec2") || dir.name.contains("omnilingual") || File(dir, "wav2vec2").exists()
                 return OfflineRecognizerConfig(
                     modelConfig = OfflineModelConfig(
-                        nemo = OfflineNemoEncDecCtcModelConfig(model = ctcModel),
+                        nemo = if (isOmnilingual) OfflineNemoEncDecCtcModelConfig() else OfflineNemoEncDecCtcModelConfig(model = ctcModel),
+                        omnilingual = if (isOmnilingual) OfflineOmnilingualAsrCtcModelConfig(model = ctcModel) else OfflineOmnilingualAsrCtcModelConfig(),
                         tokens = tokens,
                         numThreads = 2,
                     )
