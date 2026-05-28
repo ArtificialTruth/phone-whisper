@@ -160,4 +160,15 @@ If Phone Whisper saves you time, you can sponsor the project on GitHub:
 
 ## License
 
-Personal project. Do whatever you want with it.
+This application's source code is licensed under the original personal/permissive terms: "Personal project. Do whatever you want with it." (respecting the original creator's license).
+
+### Model Licenses
+
+If you use the local Danish model (**Roest Danish Wav2Vec2**), please note that it was trained as part of the CoRal project by the [Alexandra Institute](https://www.alexandra.dk/). The model is licensed under a custom license adapted from **OpenRAIL-M** (available [here](https://huggingface.co/Alvenir/coral-1-whisper-large/blob/main/LICENSE)). 
+
+In summary, the OpenRAIL-M license allows free access and commercial use, but includes specific use-based restrictions:
+1. You may not use the model to violate any law, exploit or harm minors, defame/harass, generate false information to harm others, or discriminate.
+2. Under the custom terms of the CoRal project, you specifically agree not to:
+   - Impersonate any person or entity or create synthetic speech emulating a specific natural person.
+   - Use the model to detect or infer aspects/features of an identity of any natural persons (such as name, gender, age, health, etc.).
+
