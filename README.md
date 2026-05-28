@@ -18,6 +18,14 @@ It supports:
 
 If you try it and it genuinely saves you time, please consider [sponsoring the original author, @kafkasl](https://github.com/sponsors/kafkasl).
 
+## Key Enhancements & Memory Optimizations
+
+In addition to Danish language support, this fork includes crucial memory management enhancements to prevent Out-Of-Memory (OOM) crashes when running larger on-device models:
+
+- **Automatic Idle Model Unloading**: The local transcription model is loaded dynamically and unloaded automatically after 2 minutes of inactivity, freeing up system memory.
+- **Asynchronous Lazy Pre-loading**: Models are loaded asynchronously in the background. When you tap the recording button, the app checks and triggers pre-loading if needed so that it's ready by the time you finish speaking.
+- **Thread-Safe Resource Release**: The `LocalTranscriber` cleanly releases native `sherpa-onnx` resources when unloading or when the Accessibility Service is destroyed.
+- **Large Heap Flag Enabled**: Configured `android:largeHeap="true"` in the Android Manifest to accommodate larger model requirements.
 
 ## Why I built this
 
