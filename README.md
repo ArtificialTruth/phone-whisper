@@ -2,19 +2,21 @@
   <img src="docs/logo.svg" width="128" height="128" alt="Phone Whisper Logo">
 </p>
 
-# Phone Whisper
+# Phone Whisper (with Roest Danish ASR Support)
 
-Push-to-talk dictation for Android.
+Push-to-talk dictation for Android, featuring local, offline Danish voice input.
+
+This repository is a fork of the excellent [Phone Whisper](https://github.com/kafkasl/phone-whisper) by [@kafkasl](https://github.com/kafkasl), modified to add native support for the Danish **Roest Wav2Vec2** speech recognition model.
 
 Phone Whisper lets you speak into most apps without switching keyboards. Tap the floating button, speak, tap again, and your text is inserted into the currently focused text field when the app exposes a standard Android input field.\
 
 It supports:
 
-- **Local on-device transcription** with sherpa-onnx
+- **Local on-device transcription** with sherpa-onnx (including Danish via Roest)
 - **Cloud transcription** with OpenAI Whisper
 - **Optional cleanup** with OpenAI to fix punctuation and grammar
 
-If you try it and it genuinely saves you time, consider [sponsoring](https://github.com/sponsors/kafkasl)
+If you try it and it genuinely saves you time, please consider [sponsoring the original author, @kafkasl](https://github.com/sponsors/kafkasl).
 
 
 ## Why I built this
@@ -38,7 +40,7 @@ Open it on your phone, install it, then launch the app once to finish setup.
 Requires JDK 17 and Android SDK.
 
 ```bash
-git clone https://github.com/kafkasl/phone-whisper.git && cd phone-whisper
+git clone https://github.com/ArtificialTruth/phone-whisper.git && cd phone-whisper
 make build
 ```
 
@@ -106,12 +108,13 @@ Current catalog:
 
 | Model | Size | Notes |
 |---|---:|---|
+| Roest Danish Wav2Vec2 | 315 MB | Offline Danish (wav2vec2 CTC support) |
 | Parakeet 110M | 100 MB | Best default |
 | Whisper Base | 199 MB | Solid baseline |
 | Parakeet 0.6B | 465 MB | Best quality |
 | Moonshine Tiny | 103 MB | Fastest |
 
-The app downloads and extracts models directly from the sherpa-onnx release archives.
+The app downloads and extracts models directly from the sherpa-onnx release archives, or from the Roest release for Danish support.
 
 ## Development
 
